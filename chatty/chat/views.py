@@ -2,7 +2,7 @@ from django.shortcuts import render
 from chat.models import Message
 
 def index(request):
-    return render(request, 'chat/index.html')
+    return render(request, 'index.html')
 
 def room(request, room_name):
     username = request.GET.get('username', 'Anonymous')
