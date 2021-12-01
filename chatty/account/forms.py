@@ -13,7 +13,12 @@ class RegisterForm(forms.Form):
                 'placeholder' : 'Email'
             }
         ))
-    password = forms.PasswordInput()
+    password = forms.CharField(max_length=32, widget=forms.PasswordInput(
+            attrs={
+                'style': 'height:40px;',
+                'placeholder' : 'Password'
+            }
+        )) 
 
     def clean(self):
         cleaned_data = super(RegisterForm, self).clean()

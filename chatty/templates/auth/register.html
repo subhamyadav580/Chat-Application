@@ -8,22 +8,15 @@
     <div class="column is-4 is-offset-4">
         <form method="post" novalidate>
             {% csrf_token %}
+
+        {% for field in form.visible_fields %}
         <div class="field">
             <p class="control has-icons-left has-icons-right">
-                {{form.email}}
-            </p>
-        </div>
-        <div class="field">
-            <p class="control has-icons-left">
-                {{form.username}}
-            </p>
-        </div>
-        <div class="field">
-            <p class="control has-icons-left">
-                {{form.password}}
+                {{ field }}
             </p>
         </div>
 
+        {% endfor %}
         <div class="field">
             <p class="control">
                 <button class="button is-success", type="submit">
