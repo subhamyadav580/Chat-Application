@@ -1,6 +1,8 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from account.models import User
 
-class RegisterForm(forms.Form):
+class RegisterForm(UserCreationForm):
     username = forms.CharField(max_length=30, widget=forms.TextInput(
             attrs={
                 'style': 'height:40px;',
@@ -13,16 +15,20 @@ class RegisterForm(forms.Form):
                 'placeholder' : 'Email'
             }
         ))
-    password = forms.CharField(max_length=32, widget=forms.PasswordInput(
+    password1 = forms.CharField(max_length=32, widget=forms.PasswordInput(
             attrs={
                 'style': 'height:40px;',
                 'placeholder' : 'Password'
             }
         )) 
+    password2 = forms.CharField(max_length=32, widget=forms.PasswordInput(
+            attrs={
+                'style': 'height:40px;',
+                'placeholder' : 'Password confirmation'
+            }
+        )) 
 
-    def clean(self):
-        cleaned_data = super(RegisterForm, self).clean()
-        username = cleaned_data.get('username')
-        email = cleaned_data.get('email')
-        if not username and not email:
-            raise forms.ValidationError('You have to write something!')
+    class Meta:
+        model = User
+        fields = ('email', 'username', 'password1', 'password2')
+
