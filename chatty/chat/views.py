@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from chat.models import Message
+from chatty.chat.forms import RoomCreationForm
 
 def index(request):
-    return render(request, 'index.html')
+    form = RoomCreationForm()
+    return render(request, 'index.html', {'form' : form})
 
 def room(request, room_name):
     username = request.GET.get('username', 'Anonymous')
