@@ -5,8 +5,8 @@ from account.models import User
 
 
 class Room(models.Model):
-    room = models.CharField(max_length=255)
-    room_password = models.CharField(max_length=15)
+    room_name = models.CharField(max_length=25, unique=True, blank=True)
+    room_password = models.CharField(max_length=15, blank=True)
     room_created_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
