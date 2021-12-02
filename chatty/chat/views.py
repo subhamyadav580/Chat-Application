@@ -1,9 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from chat.models import Message
-from chatty.chat.forms import RoomCreationForm
+from chat.forms import RoomCreationForm
 
 def index(request):
-    form = RoomCreationForm()
+    if request.method == 'POST':
+        form = RoomCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect(index)
+    else:
+        form = RoomCreationForm()
     return render(request, 'index.html', {'form' : form})
 
 def room(request, room_name):
