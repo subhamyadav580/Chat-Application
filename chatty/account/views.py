@@ -13,14 +13,16 @@ def register(request):
         form = RegisterForm()
     return render(request, 'auth/register.html', {'form': form})
 
-def register(request):
+def login_view(request):
     user = request.user
     if user.is_authenticated:
         return redirect(index)
     if request.method == 'POST':
-        email = request.POST['email']
+        username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(email=email, password=password)
+        print(username, password)
+        user = authenticate(username=username, password=password)
+        print(user)
         if user:
             login(request, user)
             return redirect(index)
