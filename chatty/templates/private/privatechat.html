@@ -17,8 +17,10 @@
             <a class="button is-info" id="chat-message-submit">Submit</a>
         </div>
     </div>
-
-    <small class="has-text-grey-light">Your username: shubham yadav</small>
+    {% if user.is_authenticated %}
+    <input type="hidden" id="logged-in-user" value="{{ user.id }}">
+    <small class="has-text-grey-light">Your username: {{user.username}}</small>
+    {% endif %}
 </div>
 </div>
 </div>
@@ -30,6 +32,13 @@
     }
 
     scrollToBottom();
+
+    
+    const USER_ID = document.getElementById("logged-in-user").value; 
+    console.log(USER_ID);
+
+    
+    
     let loc = window.location;
     console.log(loc);
     let wsStart = 'ws://'
@@ -48,8 +57,17 @@
         document.querySelector('#chat-message-submit').onclick = function (e) {
             const messageInputDom = document.querySelector('#chat-message-input');
             const message = messageInputDom.value;
+            let send_to;
+            if(USER_ID == 1){
+                send_to = 2;
+            }
+            else{
+                send_to = 1;
+            }
             socket.send(JSON.stringify({
-                'message': message,
+                'message' : message,
+                'sent_by' : USER_ID,
+                'sent_to' : send_to 
             }));
             messageInputDom.value = '';
         };
