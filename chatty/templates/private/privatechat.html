@@ -19,7 +19,7 @@
     </div>
     {% if user.is_authenticated %}
     <input type="hidden" id="logged-in-user" value="{{ user.id }}">
-    <small class="has-text-grey-light">Your username: {{user.username}}</small>
+    <small class="has-text-grey-light">Your username: {{user.username}} {{user.id}} </small>
     {% endif %}
 </div>
 </div>
