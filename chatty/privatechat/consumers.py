@@ -39,10 +39,10 @@ class PrivateChatConsumer(AsyncConsumer):
             print("Error:: send to user is incorrect")
         
         other_user_chat_room = f'user_chatroom_{send_to_id}'
-        self.user = self.scope['user']
+        self_user = self.scope['user']
         response = {
             'message' : msg,
-            'sent_by' : self.user.id,
+            'sent_by' : self_user.id,
         }
 
         await self.channel_layer.group_send(
